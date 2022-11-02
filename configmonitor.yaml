@@ -1,0 +1,8 @@
+apiVersion: aprabhat.com/v1
+kind: ConfigMonitor
+metadata:
+  name: app-config-monitor
+spec:
+  configmap: test-app-config
+  podSelector:
+    app: backend

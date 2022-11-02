@@ -1,0 +1,43 @@
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: configmonitors.aprabhat.com
+spec:
+  scope: Namespaced
+  names:
+    plural: configmonitors
+    singular: configmonitor
+    kind: ConfigMonitor
+  group: aprabhat.com
+  versions:
+    - name: v1
+      served: true
+      storage: true
+      schema:
+        openAPIV3Schema:
+          type: object
+          properties:
+            spec:
+              type: object
+              properties:
+                configmap:
+                  type: string
+                  description: "Name of the ConfigMap to watch for changes"
+                podSelector:
+                  type: object
+                  description: "Label selector used for selecting Pods"
+                  additionalProperties:
+                    type: string
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: config-monitor-crd
+rules:
+  - apiGroups:
+      - aprabhat.com
+    resources:
+      - configmonitor
+      - configmonitor/finalizers
+    verbs: [get, list, create, update, delete, deletecollection, watch]
