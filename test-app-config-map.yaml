@@ -4,4 +4,4 @@ metadata:
   name: test-app-config
 data:
   config.cfg: 
-    MSG="Welcome to Kubernetes CRD Demo App!"
+    MSG="Welcome to Kubernetes CRD Demo App"
